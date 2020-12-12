@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>婷婷老师给你的期末总结</title>
+
+	<link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
+	<link rel="stylesheet" type="text/css" href="css/examples.css" />
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="js/jquery.pagepiling.js"></script>
+	<script type="text/javascript">
+		var deleteLog = false;
+
+		$(document).ready(function() {
+	    	$('#pagepiling').pagepiling({
+	    		menu: '#menu',
+	    		anchors: ['page1', 'page2', 'page3','page4'],
+			    sectionsColor: ['#820aec', '#9c21be', '#de0ad3', '#e80b72'],
+			    onLeave: function(index, nextIndex, direction){
+			    	if(deleteLog){
+			    		$('#callbacksDiv').html('');
+			    	}
+			    	$('#callbacksDiv').append('<p>onLeave - index:' + index + ' nextIndex:' + nextIndex + ' direction:' + direction + '</p>')
+			    },
+			    afterRender: function(){
+			    	$('#callbacksDiv').append('<p>afterRender</p>');
+			    },
+			    afterLoad: function(anchorLink, index){
+			    	$('#callbacksDiv').append('<p>afterLoad - anchorLink:' + anchorLink + " index:" + index + '</p>');
+
+			    	//section 2
+					if(index == 2){
+						//moving the image
+						$('#section2').find('.intro').delay(100).animate({
+							left: '0%'
+						}, 1500, 'easeOutExpo', function(){
+							$('#section2').find('p').first().fadeIn(700, function(){
+								$('#section2').find('p').last().fadeIn(600);
+							});
+						});
+
+
+					}
+
+					//section 3
+					if(anchorLink == 'page3'){
+						//section 3
+						$('#section3').find('.intro').delay(100).animate({
+								left: '0%'
+						}, 1500, 'easeOutExpo');
+					}
+
+					//section 3
+					if(anchorLink == 'page4'){
+						//section 3
+						$('#section4').find('.intro').delay(100).animate({
+							left: '0%'
+						}, 1500, 'easeOutExpo');
+					}
+
+					deleteLog = true;
+			    }
+			});
+	    });
+    </script>
+
+    <style>
+    #section2 .intro{
+    	left: -150%;
+		position: relative;
+    }
+    #section2 p{
+    	display: none;
+    }
+    #section3 .intro{
+    	left: 140%;
+		position: relative;
+    }
+    </style>
+
+</head>
+<body>
+
+	<!-- <ul id="menu">
+		<li data-menuanchor="page1" class="active"><a href="#page1">Page 1</a></li>
+		<li data-menuanchor="page2"><a href="#page2">Page 2</a></li>
+		<li data-menuanchor="page3"><a href="#page3">Page 3</a></li>
+	</ul> -->
+
+	<div style="position:fixed;top:50px;left:50px;color:white;z-index:999;" id="callbacksDiv"></div>
+
+	<div id="pagepiling">
+	    <div class="section" id="section1">
+	    	<h1>开启我的年终总结</h1>
+	    </div>
+	    <div class="section" id="section2">
+	    	<div class="intro">
+	    		<h1>好学</h1>
+	    		<p>这一年我一共交了XX次作业，在婷婷老师的班中排名XX，下学期我要继续加油！</p>
+	    	</div>
+	    </div>
+	    <div class="section" id="section3">
+	    	<div class="intro">
+	    		<h1>勤奋！</h1>
+	    		<p>这一年我一共交了XX次作业，在婷婷老师的班中排名XX，下学期我要继续加油！</p>
+	    	</div>
+	    </div>
+	    <div class="section" id="section4">
+			<img name="nottarget" src="img/game/caclose.png" alt="宝箱">
+	    	<div class="intro">
+	    		<h1>陪伴！</h1>
+	    		<p>加入婷婷老师的班级<a href="https://igetcool-share.igetcool.com/mall/course?itemid=1321030635245903874&instructor=258398780" target="_blank">点击报名</a></p>
+	    	</div>
+	    </div>
+	</div>
+
+</body>
+</html>
